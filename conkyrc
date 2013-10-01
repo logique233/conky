@@ -78,8 +78,8 @@ alignment top_right
 
 
 # Gap between borders of screen and text
-gap_x 10
-gap_y 10
+gap_x 50
+gap_y 50
 
 
 # stuff after 'TEXT' will be formatted on screen
@@ -96,7 +96,7 @@ Date ${time %a, }${color}${time %e %B %G}
 Time ${time %Z, }${color}${time %H:%M:%S}
 UpTime ${color}$uptime
 
-${color orange}CPU ${hr 2}$color
+#${color orange}CPU ${hr 2}$color
 #CPU:${color} $cpu%
 #${cpugraph ffffff 000000}
 #${color}Core 1 Usage:${cpu cpu1}% $alignr${color}${color}Core 2 Usage:${cpu cpu2}%
@@ -130,4 +130,4 @@ ${color orange}CPU ${hr 2}$color
 #${color}IP: ${color}${addr eth0}
 #${color}Down:${color} ${downspeed eth0} k/s $alignr${color} Up:${color} ${upspeed eth0} k/s
 #${color}${downspeedgraph eth0 27,120 000000 006633 180} $alignr${color}${upspeedgraph eth0 27,120 000000 ff0000 25}
-${color}Total: ${totaldown eth0}           $alignr${color}Total: ${totalup eth0}
+#${color}Total: ${totaldown eth0}           $alignr${color}Total: ${totalup eth0}
