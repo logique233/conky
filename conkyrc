@@ -89,10 +89,10 @@ HOSTNAME $nodename
 SYSTEM $sysname 
 KERNEL $kernel on $machine
 
-${color orange}TIME ${hr 2}$color
-Date ${time %a, }${color}${time %e %B %G}
-Time ${time %Z, }${color}${time %H:%M:%S}
-UpTime ${color}$uptime
+#${color orange}TIME ${hr 2}$color
+#Date ${time %a, }${color}${time %e %B %G}
+#Time ${time %Z, }${color}${time %H:%M:%S}
+#UpTime ${color}$uptime
 
 #${color orange}CPU ${hr 2}$color
 #CPU:${color} $cpu%
