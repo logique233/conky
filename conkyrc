@@ -19,7 +19,7 @@ double_buffer yes
 
 
 # fiddle with window
-use_spacer right
+use_spacer left
 
 
 # Use Xft?
