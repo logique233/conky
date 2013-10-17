@@ -1,0 +1,50 @@
+alignment top_right
+background yes
+cpu_avg_samples 5
+net_avg_samples 5
+out_to_console no
+own_window_transparent yes
+update_interval 2
+own_window no
+double_buffer yes
+minimum_size 5 5
+draw_shades yes
+draw_outline no
+draw_borders yes
+stippled_borders 0
+border_width 2
+default_color black
+default_outline_color white
+default_shade_color black
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+gap_x 20
+gap_y 100 
+minimum_size 5 300
+maximum_width 300
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window yes
+own_window_class Conky
+own_window_transparent yes
+own_window_type desktop
+stippled_borders 0
+uppercase no
+use_spacer right
+mpd_host 0.0.0.0
+mpd_port 6600
+use_xft yes
+xftfont Courier 10 Pitch 426:size=8
+xftalpha 0.8
+
+
+${font Arial:size=9}${color #e43526}SYSTEM ${color DarkSlateGray}${hr 2}{$font}
+${color #597DB2}Kernel: ${color #000000}$kernel ${color #597DB2}${alignr}Uptime: ${color #000000}$uptime
+${color #597DB2}CPU   : ${color #000000}$freq MHz   $cpu%
+${color #597DB2}${cpugraph 15,300 fef7b2 e18522}
+${color #597DB2}RAM	${alignr}:	${color #000000}$memmax     $memperc% ${color #597DB2}${membar 6,150}
