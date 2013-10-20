@@ -1,50 +1,88 @@
-alignment top_right
-background yes
-cpu_avg_samples 5
-net_avg_samples 5
-out_to_console no
-own_window_transparent yes
-update_interval 2
-own_window no
-double_buffer yes
-minimum_size 5 5
-draw_shades yes
-draw_outline no
-draw_borders yes
-stippled_borders 0
-border_width 2
-default_color black
-default_outline_color white
-default_shade_color black
-draw_borders no
-draw_graph_borders yes
-draw_outline no
-draw_shades no
-gap_x 20
-gap_y 100 
-minimum_size 5 300
-maximum_width 300
-net_avg_samples 2
-no_buffers yes
-out_to_console no
-out_to_stderr no
-extra_newline no
-own_window yes
-own_window_class Conky
-own_window_transparent yes
-own_window_type desktop
-stippled_borders 0
-uppercase no
-use_spacer right
-mpd_host 0.0.0.0
-mpd_port 6600
+#Eric Partlo Linux Conky
+
+background no
 use_xft yes
-xftfont Courier 10 Pitch 426:size=8
-xftalpha 0.8
+xftfont 123:size=8
+xftalpha 0.1
+update_interval 1
+total_run_times 0
+own_window yes
+own_window_type normal
+own_window_transparent no
+own_window_argb_visual yes
+own_window_argb_value 128
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+ 
+maximum_width 800
+minimum_size 280
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+default_color lightgray
+default_shade_color red
+default_outline_color green
+alignment top_right
+gap_x 20
+gap_y -20
+ 
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 2
+override_utf8_locale yes
+use_spacer none
 
 
-${font Arial:size=9}${color #e43526}SYSTEM ${color DarkSlateGray}${hr 2}{$font}
-${color #597DB2}Kernel: ${color #000000}$kernel ${color #597DB2}${alignr}Uptime: ${color #000000}$uptime
-${color #597DB2}CPU   : ${color #000000}$freq MHz   $cpu%
-${color #597DB2}${cpugraph 15,300 fef7b2 e18522}
-${color #597DB2}RAM	${alignr}:	${color #000000}$memmax     $memperc% ${color #597DB2}${membar 6,150}
+TEXT
+
+# SYS
+${font Open Sans:Bold:size=10}${color dodgerblue3}SYSTEM${hr 2}$color${font}
+$sysname $kernel $alignr $machine
+Uptime $alignr $uptime
+Temp1 Temperature $alignr ${execi 30 sensors | grep 'temp1:' | cut -c16-19}°C
+Temp2 Temperature $alignr ${execi 30 sensors | grep 'temp2:' | cut -c16-19}°C
+
+# CPU
+${font Open Sans:Bold:size=10}${color dodgerblue3}CPU${hr 2}
+$color${font}Intel i5 2500k $alignr ${freq_g cpu0}GHz
+${font}Core 0 ${color dodgerblue3}${cpu cpu1} % $alignc ${color dodgerblue3}${cpubar cpu1}${color}
+${font}Core 1 ${color dodgerblue3}${cpu cpu2} % $alignc ${color dodgerblue3}${cpubar cpu2}${color}
+${font}Core 2 ${color dodgerblue3}${cpu cpu3} % $alignc ${color dodgerblue3}${cpubar cpu3}${color}
+${font}Core 3 ${color dodgerblue3}${cpu cpu4} % $alignc ${color dodgerblue3}${cpubar cpu4}${color}
+
+# MEMORY
+${font Open Sans:Bold:size=10}${color dodgerblue3}MEMORY${hr 2}
+$color${font}${font Open Sans:bold:size=8.5}RAM$font
+$mem / $memmax $alignr $memperc %
+$membar
+${font Open Sans:bold:size=8.5}SWAP$font
+$swap / $swapmax $alignr $swapperc
+${swapbar};
+ 
+# NETWORK
+${font Open Sans:Bold:size=10}${color dodgerblue3}Network${hr 2}
+$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 3600 wget -O - http://ip.tupeux.com | tail}$font
+${font Open Sans:bold:size=8.5}wlan1 $font$alignr ${addr eth0}
+down $alignr ${downspeedf wlan1} kb/s
+up $alignr ${upspeedf wlan1} kb/s
+down total ${totaldown wlan1} $alignr up total ${totalup eth0}
+ 
+# HDD
+${font Open Sans:Bold:size=10}${color dodgerblue3}Disks${hr 2}
+${font Open Sans:bold:size=8.5}${color white}ROOT $font$font$alignr ${fs_type /}
+${fs_used /} / ${fs_size /} $alignr ${fs_used_perc /} %
+${fs_bar /}
+
+# RSS
+${font Open Sans:Bold:size=10}${color dodgerblue3}BBC News ${hr 2}
+${font}${color white}${rss http://feeds.bbci.co.uk/news/rss.xml 1 item_title 0}
+
+${font}${color white}${rss http://feeds.bbci.co.uk/news/rss.xml 1 item_title 1}
+
+${font}${color white}${rss http://feeds.bbci.co.uk/news/rss.xml 1 item_title 2}
+
+${font}${color white}${rss http://feeds.bbci.co.uk/news/rss.xml 1 item_title 3}
+
+${font}${color white}${rss http://feeds.bbci.co.uk/news/rss.xml 1 item_title 4}
