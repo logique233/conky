@@ -1,0 +1,7 @@
+# NETWORK
+${font Open Sans:Bold:size=10}${color dodgerblue3}Network${hr 2}
+$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 3600 wget -O - http://ip.tupeux.com | tail}$font
+${font Open Sans:bold:size=8.5}wlan1 $font$alignr ${addr eth0}
+down $alignr ${downspeedf wlan1} kb/s
+up $alignr ${upspeedf wlan1} kb/s
+down total ${totaldown wlan1} $alignr up total ${totalup eth0}
