@@ -15,7 +15,7 @@ own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
  
 maximum_width 800
-minimum_size 280
+minimum_size 300
 draw_shades no
 draw_outline no
 draw_borders no
@@ -24,8 +24,8 @@ default_color lightgray
 default_shade_color red
 default_outline_color green
 alignment top_right
-gap_x 20
-gap_y -20
+gap_x 25
+gap_y 25
  
 no_buffers yes
 uppercase no
@@ -34,8 +34,29 @@ net_avg_samples 2
 override_utf8_locale yes
 use_spacer none
 
+border_inner_margin 15
+border_outer_margin 0
+
+color1 0099CC
+color2 9933CC
+color3 669900
+color4 FF8800
+color5 CC0000
+color6 AAAAAA
+color7 484848
 
 TEXT
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=1922738&u=c" -o ~/.cache/weather.xml}${font Open Sans Light:size=15}${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "city=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}, ${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "country=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}
+${font Open Sans Light:size=60}${alignr}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font}${voffset -20}
+${execi 300 cp -f ~/.conky-google-now/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 0,45 -s 60x60}
+${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | tr '[a-z]' '[A-Z]'}
+${image ~/.conky-google-now/wind.png -p 0,135 -s 15x15}${goto 35}${execi 300 grep "yweather:wind" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${execi 300 grep "yweather:units" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${image ~/.conky-google-now/humidity.png -p 0,155 -s 15x15}${goto 35}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}%
+${execi 300 cp -f ~/.conky-google-now/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1').png ~/.cache/weather-today.png}${image ~/.cache/weather-today.png -p 0,185 -s 30x30}${execi 300 cp -f ~/.conky-google-now/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-tomorrow.png}${image ~/.cache/weather-tomorrow.png -p 130,185 -s 30x30}${voffset -10}
+${goto 60}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1' | tr '[a-z]' '[A-Z]'}${goto 190}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2' | tr '[a-z]' '[A-Z]'}
+${goto 60}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}° ${color6}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°${color}${goto 190}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}° ${color6}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°${color}${voffset 15}
+
+
 
 # SYS
 ${font Open Sans:Bold:size=10}${color dodgerblue3}SYSTEM${hr 2}$color${font}
@@ -60,14 +81,6 @@ $membar
 ${font Open Sans:bold:size=8.5}SWAP$font
 $swap / $swapmax $alignr $swapperc
 ${swapbar};
- 
-# NETWORK
-${font Open Sans:Bold:size=10}${color dodgerblue3}Network${hr 2}
-$color${font Open Sans:bold:size=8.5}External IP ${font}${alignr}${execi 3600 wget -O - http://ip.tupeux.com | tail}$font
-${font Open Sans:bold:size=8.5}wlan1 $font$alignr ${addr eth0}
-down $alignr ${downspeedf wlan1} kb/s
-up $alignr ${upspeedf wlan1} kb/s
-down total ${totaldown wlan1} $alignr up total ${totalup eth0}
  
 # HDD
 ${font Open Sans:Bold:size=10}${color dodgerblue3}Disks${hr 2}
