@@ -1,6 +1,6 @@
 # SYS
+# 
+
 ${font Open Sans:Bold:size=10}${color dodgerblue3}SYSTEM${hr 2}$color${font}
 $sysname $kernel $alignr $machine
 Uptime $alignr $uptime
-Temp1 Temperature $alignr ${execi 30 sensors | grep 'temp1:' | cut -c16-19}°C
-Temp2 Temperature $alignr ${execi 30 sensors | grep 'temp2:' | cut -c16-19}°C

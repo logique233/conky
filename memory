@@ -1,8 +1,10 @@
 # MEMORY
+# SWAP not working
+
 ${font Open Sans:Bold:size=10}${color dodgerblue3}MEMORY${hr 2}
-$color${font}${font Open Sans:bold:size=8.5}RAM$font
+$color${font}${font Open Sans:size=8.5}RAM$font
 $mem / $memmax $alignr $memperc %
 $membar
-${font Open Sans:bold:size=8.5}SWAP$font
+${font Open Sans:size=8.5}SWAP$font
 $swap / $swapmax $alignr $swapperc
-${swapbar};
+${swapbar}

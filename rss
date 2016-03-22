@@ -1,5 +1,6 @@
 # RSS
-${font Open Sans:Bold:size=10}${color dodgerblue3}BBC News ${hr 2}
+${font Open Sans:Bold:size=10}${color dodgerblue3}RSS${hr 2}
+${font Open Sans:size=8}${color white}BBC News
 ${font}${color white}${rss http://feeds.bbci.co.uk/news/rss.xml 1 item_title 0}
 
 ${font}${color white}${rss http://feeds.bbci.co.uk/news/rss.xml 1 item_title 1}

@@ -1,5 +1,3 @@
-#Conky
-
 background no
 use_xft yes
 xftfont 123:size=8
@@ -51,17 +49,26 @@ TEXT
 ${font Open Sans:Bold:size=10}${color dodgerblue3}SYSTEM${hr 2}$color${font}
 $sysname $kernel $alignr $machine
 Uptime $alignr $uptime
-Temp1 Temperature $alignr ${execi 30 sensors | grep 'temp1:' | cut -c16-19}°C
-Temp2 Temperature $alignr ${execi 30 sensors | grep 'temp2:' | cut -c16-19}°C
+
+# TEMP
+${font Open Sans:Bold:size=10}${color dodgerblue3}TEMP${hr 2}$color${font}
+CPU Temp: $alignr ${execi 5 sensors | grep 'CPU Temp' | cut -c15-21}
+GPU Temp: $alignr ${execi 5 sensors | grep 'GPU Temp' | cut -c15-21}
+MOBO Temp1: $alignr ${execi 5 sensors | grep 'temp0:' | cut -c15-19}
+MOBO Temp2: $alignr ${execi 5 sensors | grep 'temp2:' | cut -c15-19}
+MOBO Temp3: $alignr ${execi 5 sensors | grep 'temp3:' | cut -c15-19}
+Fan1 (thermistor): $alignr ${execi 5 sensors | grep 'fan1:' | cut -c14-23}
+Fan2 (thermal diode): $alignr ${execi 5 sensors | grep 'fan2:' | cut -c14-23}
+Fan3 (Intel PECI): $alignr ${execi 5 sensors | grep 'fan3:' | cut -c14-23}
 
 # CPU
 ${font Open Sans:Bold:size=10}${color dodgerblue3}CPU${hr 2}
-$color${font}Intel i5 2500k $alignr ${freq_g cpu0}GHz
+$color${font} ${execi cat 1000 /proc/cpuinfo | grep 'model name'} $alignr ${freq_g cpu0}GHz
 ${font}Core 0 ${color dodgerblue3}${cpu cpu1} % $alignc ${color dodgerblue3}${cpubar cpu1}${color}
 ${font}Core 1 ${color dodgerblue3}${cpu cpu2} % $alignc ${color dodgerblue3}${cpubar cpu2}${color}
 ${font}Core 2 ${color dodgerblue3}${cpu cpu3} % $alignc ${color dodgerblue3}${cpubar cpu3}${color}
 ${font}Core 3 ${color dodgerblue3}${cpu cpu4} % $alignc ${color dodgerblue3}${cpubar cpu4}${color}
-${font}Conky PID: ${top -ef | grep 'compiz' | grep -v grep | awk '{print $2}'}
+${font}Conky PID: ${top -ef | grep 'conky' | grep -v grep | awk '{print $2}'}
 
 # MEMORY
 ${font Open Sans:Bold:size=10}${color dodgerblue3}MEMORY${hr 2}
